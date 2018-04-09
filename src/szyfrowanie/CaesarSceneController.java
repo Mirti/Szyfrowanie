@@ -29,6 +29,7 @@ public class CaesarSceneController implements Initializable {
         // TODO
     }
 
+    //Metoda szyfrująca podanym kluczem
     @FXML
     private void encode(){
         System.out.print(validateKey(txtKey.getText()));
