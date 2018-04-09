@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="szyfrowanie.MainSceneController">
+   <children>
+      <AnchorPane fx:id="mainPane" id="mainPane" layoutX="14.0" layoutY="30.0" prefHeight="357.0" prefWidth="576.0" />
+      <MenuBar layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Wybór szyfru">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Szyfr Cezara" onAction="#openCaesarScene" />
+                  <MenuItem mnemonicParsing="false" text="Szyfr jakiegoś chuja" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
