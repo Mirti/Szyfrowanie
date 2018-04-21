@@ -8,16 +8,47 @@
 
 <AnchorPane id="AnchorPane" prefHeight="348.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="szyfrowanie.MainSceneController">
    <children>
-      <AnchorPane id="mainPane" fx:id="mainPane" layoutX="14.0" layoutY="30.0" prefHeight="357.0" prefWidth="576.0" />
-      <MenuBar layoutY="2.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Wybór szyfru">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#openCaesarScene" text="Szyfr Cezara" />
-                  <MenuItem mnemonicParsing="false" text="Szyfr jakiegoś chuja" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+      <AnchorPane id="mainPane" fx:id="mainPane" layoutX="14.0" layoutY="30.0" prefHeight="357.0" prefWidth="576.0">
+         <children>
+            <TabPane layoutX="-18.0" layoutY="-30.0" prefHeight="387.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="caesarTab" onSelectionChanged="#openCaesarScene" text="Szyfr Cezara">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                <Tab fx:id="fenceTab" onSelectionChanged="#openFenceScene" text="Szyfr płotkowy">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+                  <Tab fx:id="playfairTab" onSelectionChanged="#openPlayfairScene" text="Szyfr Playfaira">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="vigenereTab" onSelectionChanged="#openVigenereScene" text="Szyfr Vigenere'a">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="hillTab" onSelectionChanged="#openHillScene" text="Szyfr Hilla">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="beaufortTab" onSelectionChanged="#openBeaufortScene" text="Szyfr Beauforta">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="md5Tab" onSelectionChanged="#openMD5Scene" text="MD5">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children></AnchorPane>
    </children>
 </AnchorPane>

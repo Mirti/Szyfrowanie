@@ -38,7 +38,7 @@ public class CaesarSceneController implements Initializable {
     private RadioButton rbDecode;
 
     /**
-     * Initializes the controller class.
+     * Przypisanie RadioButtonów do jednej grupy
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -48,6 +48,9 @@ public class CaesarSceneController implements Initializable {
         rbDecode.setToggleGroup(group);
     }
 
+    /*
+    Metoda wywołująca szyfrowanie lub deszyfrowanie w zależności od wyboru użytkownika
+    */
     @FXML
     private void process(){
         if(rbEncode.isSelected()) encode();
@@ -77,6 +80,7 @@ public class CaesarSceneController implements Initializable {
         txtResult.setText(result);
     }
     
+    //Metoda deszyfrująca podanym kluczem
     @FXML
     private void decode() {
         int key = validateKey(txtKey.getText());
@@ -103,6 +107,7 @@ public class CaesarSceneController implements Initializable {
     Metoda walidująca poprawność klucza.
      */
     private static int validateKey(String key) {
+        if (key.equals("")) return 3;
         try {
             int convertedInput = Integer.parseInt(key);
             if (convertedInput <= 0) {
@@ -140,6 +145,9 @@ public class CaesarSceneController implements Initializable {
         return false;
     }
 
+    /*
+    Metoda zwracająca numer podanej litery w alfabecie
+    */
     private static int numberInAlphabet(char c) {
         for (int i = 0; i < alphabet.length; i++) {
             if (alphabet[i] == c) {
