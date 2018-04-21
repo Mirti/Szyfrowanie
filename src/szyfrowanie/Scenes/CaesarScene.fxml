@@ -6,11 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="szyfrowanie.CaesarSceneController">
+<AnchorPane id="AnchorPane" prefHeight="267.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="szyfrowanie.CaesarSceneController">
    <children>
-      <TextArea id="txtInput" layoutX="14.0" layoutY="14.0" prefHeight="191.0" prefWidth="284.0" promptText="Wpisz tekst do szyfrowania" />
-      <Button id="btnEncode" layoutX="449.0" layoutY="51.0" mnemonicParsing="false" text="Szyfruj" onAction="#encode" />
-      <TextField fx:id="txtKey" id="txtKey" layoutX="314.0" layoutY="64.0" prefHeight="25.0" prefWidth="95.0" />
+      <TextArea id="txtInput" fx:id="txtInput" layoutX="14.0" layoutY="14.0" prefHeight="99.0" prefWidth="284.0" promptText="Wpisz tekst wejściowy" />
+      <Button id="btnProcess" layoutX="446.0" layoutY="83.0" mnemonicParsing="false" onAction="#process" prefHeight="60.0" prefWidth="98.0" text="Przetwarzanie" />
+      <TextField id="txtKey" fx:id="txtKey" layoutX="317.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" />
+      <Label layoutX="351.0" layoutY="14.0" text="Klucz:" />
+      <TextArea fx:id="txtResult" editable="false" layoutX="14.0" layoutY="135.0" prefHeight="99.0" prefWidth="284.0" promptText="Wynik" />
+      <RadioButton fx:id="rbEncode" layoutX="317.0" layoutY="83.0" mnemonicParsing="false" text="Szyfrowanie" />
+      <RadioButton fx:id="rbDecode" layoutX="317.0" layoutY="105.0" mnemonicParsing="false" text="Deszyfrowanie" />
    </children>
 </AnchorPane>
