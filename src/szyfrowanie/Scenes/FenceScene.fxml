@@ -9,7 +9,7 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="szyfrowanie.FenceSceneController">
      <children>
       <TextArea id="txtInput" fx:id="txtInput" layoutX="14.0" layoutY="14.0" prefHeight="99.0" prefWidth="284.0" promptText="Wpisz tekst wejściowy" />
-      <Button id="btnProcess" layoutX="446.0" layoutY="83.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="98.0" text="Przetwarzanie" />
+      <Button id="btnProcess" layoutX="446.0" layoutY="83.0" onAction="#process" mnemonicParsing="false" prefHeight="60.0" prefWidth="98.0" text="Przetwarzanie" />
       <TextField id="txtKey" fx:id="txtKey" layoutX="317.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" />
       <Label layoutX="351.0" layoutY="14.0" text="Gzyms" />
       <TextArea fx:id="txtResult" editable="false" layoutX="14.0" layoutY="135.0" prefHeight="99.0" prefWidth="284.0" promptText="Wynik" />
