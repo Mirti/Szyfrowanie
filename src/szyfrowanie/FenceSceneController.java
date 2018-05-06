@@ -99,11 +99,12 @@ public class FenceSceneController implements Initializable {
                 for(int j = 0; j < c; j++)
                 {
                     //można usunąć if i będą 'x' w szfrogramie
-                    if(codedText[i][j] == 'x'){
-                        result = result;
-                    } else{
-                        result += codedText[i][j];
-                    }
+//                    if(codedText[i][j] == 'x'){
+//                        result = result;
+//                    } else{
+//                        result += codedText[i][j];
+//                    }
+                    result += codedText[i][j];
                 }
             }
         } else {
