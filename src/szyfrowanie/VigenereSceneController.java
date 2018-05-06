@@ -90,7 +90,6 @@ public class VigenereSceneController implements Initializable {
                 int positionX = numberInAlphabet(key.charAt(i));
                 //Szukanie w kolumnie
                 for (int j = 0; j < alphabet.length; j++) {
-                    System.out.print(table[positionX][j]);
                     if (table[positionX][j] == input.charAt(i)) {
                         result = result + table[0][j];
                     }
