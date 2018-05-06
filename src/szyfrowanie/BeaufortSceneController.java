@@ -68,7 +68,10 @@ public class BeaufortSceneController implements Initializable {
         String text = txtInput.getText();
         String result = "";
         if (validateInput(text) && key != -1) {
-            result = alphabet[key]+"";
+            int pos,a;
+            a = numberInAlphabet(text.charAt(0));
+            pos = (a + key) % alphabet.length;
+            result = alphabet[pos]+"";
             System.out.println(key);
             for (int i = text.length()-1; i > 0; i--) {
                 int currentPosition = numberInAlphabet(text.charAt(i));
@@ -95,9 +98,8 @@ public class BeaufortSceneController implements Initializable {
         if (validateInput(text) && key != -1) {
             for (int i = text.length()-1; i >= 0; i--) {
                 int currentPosition = numberInAlphabet(text.charAt(i));
-                //System.out.println(currentPosition);//fecbazyxwvutsrqponmlkjihg
-                int nextPosition = (currentPosition-1 - key +alphabet.length) % alphabet.length;
-                System.out.println(nextPosition);
+                System.out.println(currentPosition);
+                int nextPosition = (currentPosition - key + alphabet.length) % alphabet.length;
                 result = result + alphabet[nextPosition];
             }
         } else {
@@ -108,7 +110,13 @@ public class BeaufortSceneController implements Initializable {
                     + "\n Klucz musi być całkowitą liczbą dodatnią");
             alert.showAndWait();
         }
-        txtResult.setText(result);
+        char a = result.charAt(result.length()-1);
+        String temp = "";
+        temp = temp + a;
+        for(int i =0; i< result.length()-1; i++){
+            temp = temp + result.charAt(i);
+        }
+        txtResult.setText(temp);
     }
 
     /*
