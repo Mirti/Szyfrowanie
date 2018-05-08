@@ -90,7 +90,7 @@ public class FenceSceneController implements Initializable {
                 if(pos != text.length())
                     codedText[j][i] = text.charAt(pos++);
                 else
-                    codedText[j][i] = 'x';
+                    codedText[j][i] = ' ';
                 }
             }
             //tablica do string
