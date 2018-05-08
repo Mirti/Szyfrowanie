@@ -104,7 +104,7 @@ public class PlayfairSceneController implements Initializable {
             alert.setTitle("Informacja");
             alert.setHeaderText(null);
             alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z, z wyłączeniem j"
-                    + "\n Klucz musi zawirać wyłącznie znaki od a do z z wyłączeniem j");
+                    + "\n Klucz musi zawierać wyłącznie znaki od a do z z wyłączeniem j");
             alert.showAndWait();
         }
     }
@@ -143,7 +143,7 @@ public class PlayfairSceneController implements Initializable {
             alert.setTitle("Informacja");
             alert.setHeaderText(null);
             alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z z wyłączeniem j"
-                    + "\n Klucz musi zawirać wyłącznie znaki od a do z z wyłączeniem j");
+                    + "\n Klucz musi zawierać wyłącznie znaki od a do z z wyłączeniem j");
             alert.showAndWait();
         }
     }

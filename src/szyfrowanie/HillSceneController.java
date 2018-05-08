@@ -99,84 +99,129 @@ public class HillSceneController implements Initializable {
     //Metoda szyfrująca podanym kluczem
     @FXML
     private void encode() {
-        String result = "";
-        createKeyMatrix(); //Tworzenie macierzy z klucza
-        SimpleMatrix input, tempResult; //Macierz liczb wyrazu wejściowego
+        if (validate()) {
+            String result = "";
+            createKeyMatrix(); //Tworzenie macierzy z klucza
+            SimpleMatrix input, tempResult; //Macierz liczb wyrazu wejściowego
 
-        double[] numbers = wordToNumbers(txtInput.getText());
+            
 
-        if (rb2.isSelected()) { //Dla macierzy 2x2
-            for (int i = 0; i < numbers.length; i = i + 2) {
-                input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
-                tempResult = keyMatrix.mult(input); //mnożenie macierzy
-                for (int j = 0; j < tempResult.getNumElements(); j++) {
-                result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+            if (rb2.isSelected()) { //Dla macierzy 2x2
+                System.out.println(adjustInput(txtInput.getText(),2));
+                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(),2));
+                for (int i = 0; i < numbers.length; i = i + 2) {
+                    input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
+                    tempResult = keyMatrix.mult(input); //mnożenie macierzy
+                    for (int j = 0; j < tempResult.getNumElements(); j++) {
+                        result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+                    }
                 }
+                txtResult.setText(result);
             }
-            txtResult.setText(result);
-        }
 
-        if (rb3.isSelected()) { //Dla macierzy 3x3
-
+            if (rb3.isSelected()) { //Dla macierzy 3x3
+                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(),3));
+                for (int i = 0; i < numbers.length; i = i + 3) {
+                    input = new SimpleMatrix(3, 1, true, new double[]{numbers[i], numbers[i + 1], numbers[i + 2]});
+                    tempResult = keyMatrix.mult(input); //mnożenie macierzy
+                    for (int j = 0; j < tempResult.getNumElements(); j++) {
+                        result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+                    }
+                }
+                txtResult.setText(result);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informacja");
+            alert.setHeaderText(null);
+            alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z"
+                    + "\n Klucz musi zawierać wyłącznie liczby");
+            alert.showAndWait();
         }
     }
 
     //Metoda deszyfrująca podanym kluczem
     @FXML
     private void decode() {
-        String result = "";
-        createKeyMatrix(); //Tworzenie macierzy z klucza
-        SimpleMatrix input, tempResult; //Macierz liczb wyrazu wejściowego
+        if (validate()) {
+            String result = "";
+            createKeyMatrix(); //Tworzenie macierzy z klucza
+            SimpleMatrix input, tempResult; //Macierz liczb wyrazu wejściowego
 
-        double[] numbers = wordToNumbers(txtInput.getText());
+            double[] numbers = wordToNumbers(txtInput.getText());
 
-        if (rb2.isSelected()) { //Dla macierzy 2x2
-            for (int i = 0; i < numbers.length; i = i + 2) {
-                input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
-                tempResult = keyMatrix.invert().mult(input); //mnożenie macierzy
-                //Usuwanie minusa z liczb
-                tempResult.print();
-                for (int j = 0; j < tempResult.getNumElements(); j++) {
-                    if (tempResult.get(j) < 0) { //jeżeli liczba w macierzy mniejsza od 0
-                        result = result +alphabet[modulo((int)tempResult.get(j), alphabet.length)];
-                    }else{ //jeżeli większa
-                        result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+            if (rb2.isSelected()) { //Dla macierzy 2x2
+                keyMatrix.invert().print();
+                for (int i = 0; i < numbers.length; i = i + 2) {
+                    input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
+                    tempResult = keyMatrix.invert().mult(input); //mnożenie macierzy
+                    //Usuwanie minusa z liczb
+                    tempResult.print();
+                    for (int j = 0; j < tempResult.getNumElements(); j++) {
+                        if (tempResult.get(j) < 0) { //jeżeli liczba w macierzy mniejsza od 0
+                            result = result + alphabet[modulo((int) tempResult.get(j), alphabet.length)];
+                        } else { //jeżeli większa
+                            result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
+                        }
                     }
                 }
+                txtResult.setText(result);
             }
-            txtResult.setText(result);
+            if (rb3.isSelected()) {
+                keyMatrix.invert().print();
+                for (int i = 0; i < numbers.length; i = i + 3) {
+                    input = new SimpleMatrix(3, 1, true, new double[]{numbers[i], numbers[i + 1], numbers[i + 2]});
+                    tempResult = keyMatrix.invert().mult(input); //mnożenie macierzy
+                    //Usuwanie minusa z liczb
+                    tempResult.print();
+                    for (int j = 0; j < tempResult.getNumElements(); j++) {
+                        if (tempResult.get(j) < 0) { //jeżeli liczba w macierzy mniejsza od 0
+                            result = result + alphabet[modulo((int) tempResult.get(j), alphabet.length)];
+                        } else { //jeżeli większa
+                            result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
+                        }
+                    }
+                }
+                txtResult.setText(result);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informacja");
+            alert.setHeaderText(null);
+            alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z"
+                    + "\n Klucz musi zawierać wyłącznie liczby");
+            alert.showAndWait();
         }
     }
 
-    /*
-    Metoda walidująca poprawność klucza.
-     */
-    private static int validateKey(String key) {
-        if (key.equals("")) {
-            return 3;
-        }
-        try {
-            int convertedInput = Integer.parseInt(key);
-            if (convertedInput <= 0) {
-                return -1;
-            }
-            return convertedInput;
-        } catch (Exception e) {
-            return -1;
-        }
-    }
-
-    /*
-    Metoda sprawdzająca, czy tekst wejściowy jest poprawny
-     */
-    private static boolean validateInput(String input) {
-        for (int i = 0; i < input.length(); i++) {
-            if (!isInAlphabet(input.charAt(i))) {
-                return false;
-            }
-        }
+    private boolean validate() {
+//
+//        //Sprawdzanie tekstu wejściowego
+//        for (int i = 0; i < txtInput.getText().length(); i++) {
+//            for (int j = 0; j < alphabet.length; j++) {
+//                if (txtInput.getText().charAt(i) != alphabet[j]) {
+//                    return false;
+//                }
+//            }
+//        }
+//        //Sprawdzanie klucza
+//        double d;
+//        try {
+//             d = Double.parseDouble(txt11.getText());
+//             d = Double.parseDouble(txt12.getText());
+//             d = Double.parseDouble(txt13.getText());
+//             d = Double.parseDouble(txt21.getText());
+//             d = Double.parseDouble(txt22.getText());
+//             d = Double.parseDouble(txt23.getText());
+//             d = Double.parseDouble(txt31.getText());
+//             d = Double.parseDouble(txt32.getText());
+//             d = Double.parseDouble(txt33.getText());
+//        } catch (NumberFormatException nfe) {
+//            return false;
+//        }
+//
         return true;
-    }
+   }
 
     /*
     Pomocnicza metoda sprawdzająca, czy dany znak znajduje się w alfabecie
@@ -226,8 +271,34 @@ public class HillSceneController implements Initializable {
         }
     }
     
-    private int modulo(int a, int b){
-        int modulo= (((a % b) + b) % b);
+    //Metoda służąca dostosowaniu długości słowa wejściowego
+    private String adjustInput(String input, int matrixSize){
+        String result="";
+        if(matrixSize == 2){
+            if(input.length()%2!=0){
+                result = input+"x";
+            }
+            else{
+                 result=input;
+            }
+        }
+        if(matrixSize ==3 ){
+            if(input.length()%3==1){
+                result = input+"xx";
+            }
+            else if(input.length()%3==2){
+                result = input+"x";
+            }else{
+                result= input;
+            }
+            
+        }
+        System.out.println(result);
+        return result;
+    }
+
+    private int modulo(int a, int b) {
+        int modulo = (((a % b) + b) % b);
         return modulo;
     }
 }
