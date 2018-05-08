@@ -104,11 +104,9 @@ public class HillSceneController implements Initializable {
             createKeyMatrix(); //Tworzenie macierzy z klucza
             SimpleMatrix input, tempResult; //Macierz liczb wyrazu wejściowego
 
-            
-
             if (rb2.isSelected()) { //Dla macierzy 2x2
-                System.out.println(adjustInput(txtInput.getText(),2));
-                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(),2));
+                System.out.println(adjustInput(txtInput.getText(), 2));
+                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(), 2));
                 for (int i = 0; i < numbers.length; i = i + 2) {
                     input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
                     tempResult = keyMatrix.mult(input); //mnożenie macierzy
@@ -120,7 +118,7 @@ public class HillSceneController implements Initializable {
             }
 
             if (rb3.isSelected()) { //Dla macierzy 3x3
-                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(),3));
+                double[] numbers = wordToNumbers(adjustInput(txtInput.getText(), 3));
                 for (int i = 0; i < numbers.length; i = i + 3) {
                     input = new SimpleMatrix(3, 1, true, new double[]{numbers[i], numbers[i + 1], numbers[i + 2]});
                     tempResult = keyMatrix.mult(input); //mnożenie macierzy
@@ -195,37 +193,46 @@ public class HillSceneController implements Initializable {
     }
 
     private boolean validate() {
-//
-//        //Sprawdzanie tekstu wejściowego
-//        for (int i = 0; i < txtInput.getText().length(); i++) {
-//            for (int j = 0; j < alphabet.length; j++) {
-//                if (txtInput.getText().charAt(i) != alphabet[j]) {
-//                    return false;
-//                }
-//            }
-//        }
-//        //Sprawdzanie klucza
-//        double d;
-//        try {
-//             d = Double.parseDouble(txt11.getText());
-//             d = Double.parseDouble(txt12.getText());
-//             d = Double.parseDouble(txt13.getText());
-//             d = Double.parseDouble(txt21.getText());
-//             d = Double.parseDouble(txt22.getText());
-//             d = Double.parseDouble(txt23.getText());
-//             d = Double.parseDouble(txt31.getText());
-//             d = Double.parseDouble(txt32.getText());
-//             d = Double.parseDouble(txt33.getText());
-//        } catch (NumberFormatException nfe) {
-//            return false;
-//        }
-//
-        return true;
-   }
+    //    Sprawdzanie tekstu wejściowego
 
-    /*
+        //Sprawdzanie klucza
+        double d;
+        if (rb2.isSelected()) {
+            try {
+                d = Double.parseDouble(txt11.getText());
+                d = Double.parseDouble(txt12.getText());
+                d = Double.parseDouble(txt21.getText());
+                d = Double.parseDouble(txt22.getText());
+
+            } catch (NumberFormatException nfe) {
+                return false;
+            }
+        }
+
+
+            if (rb3.isSelected()) {
+                try {
+                    d = Double.parseDouble(txt11.getText());
+                    d = Double.parseDouble(txt12.getText());
+                    d = Double.parseDouble(txt13.getText());
+                    d = Double.parseDouble(txt21.getText());
+                    d = Double.parseDouble(txt22.getText());
+                    d = Double.parseDouble(txt23.getText());
+                    d = Double.parseDouble(txt31.getText());
+                    d = Double.parseDouble(txt32.getText());
+                    d = Double.parseDouble(txt33.getText());
+
+                } catch (NumberFormatException nfe) {
+                    return false;
+                }
+           }
+            return true;
+    }
+
+       
+        /*
     Pomocnicza metoda sprawdzająca, czy dany znak znajduje się w alfabecie
-     */
+         */
     private static boolean isInAlphabet(char c) {
         for (int i = 0; i < alphabet.length; i++) {
             if (alphabet[i] == c) {
@@ -270,28 +277,26 @@ public class HillSceneController implements Initializable {
             keyMatrix = new SimpleMatrix(3, 3, true, key);
         }
     }
-    
+
     //Metoda służąca dostosowaniu długości słowa wejściowego
-    private String adjustInput(String input, int matrixSize){
-        String result="";
-        if(matrixSize == 2){
-            if(input.length()%2!=0){
-                result = input+"x";
-            }
-            else{
-                 result=input;
+    private String adjustInput(String input, int matrixSize) {
+        String result = "";
+        if (matrixSize == 2) {
+            if (input.length() % 2 != 0) {
+                result = input + "x";
+            } else {
+                result = input;
             }
         }
-        if(matrixSize ==3 ){
-            if(input.length()%3==1){
-                result = input+"xx";
+        if (matrixSize == 3) {
+            if (input.length() % 3 == 1) {
+                result = input + "xx";
+            } else if (input.length() % 3 == 2) {
+                result = input + "x";
+            } else {
+                result = input;
             }
-            else if(input.length()%3==2){
-                result = input+"x";
-            }else{
-                result= input;
-            }
-            
+
         }
         System.out.println(result);
         return result;
