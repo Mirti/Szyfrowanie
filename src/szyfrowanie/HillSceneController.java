@@ -193,7 +193,12 @@ public class HillSceneController implements Initializable {
     }
 
     private boolean validate() {
-    //    Sprawdzanie tekstu wejściowego
+        //    Sprawdzanie tekstu wejściowego
+        for (int i = 0; i < txtInput.getText().length(); i++) {
+            if (!isInAlphabet(txtInput.getText().charAt(i))) {
+                return false;
+            }
+        }
 
         //Sprawdzanie klucza
         double d;
@@ -209,30 +214,28 @@ public class HillSceneController implements Initializable {
             }
         }
 
+        if (rb3.isSelected()) {
+            try {
+                d = Double.parseDouble(txt11.getText());
+                d = Double.parseDouble(txt12.getText());
+                d = Double.parseDouble(txt13.getText());
+                d = Double.parseDouble(txt21.getText());
+                d = Double.parseDouble(txt22.getText());
+                d = Double.parseDouble(txt23.getText());
+                d = Double.parseDouble(txt31.getText());
+                d = Double.parseDouble(txt32.getText());
+                d = Double.parseDouble(txt33.getText());
 
-            if (rb3.isSelected()) {
-                try {
-                    d = Double.parseDouble(txt11.getText());
-                    d = Double.parseDouble(txt12.getText());
-                    d = Double.parseDouble(txt13.getText());
-                    d = Double.parseDouble(txt21.getText());
-                    d = Double.parseDouble(txt22.getText());
-                    d = Double.parseDouble(txt23.getText());
-                    d = Double.parseDouble(txt31.getText());
-                    d = Double.parseDouble(txt32.getText());
-                    d = Double.parseDouble(txt33.getText());
-
-                } catch (NumberFormatException nfe) {
-                    return false;
-                }
-           }
-            return true;
+            } catch (NumberFormatException nfe) {
+                return false;
+            }
+        }
+        return true;
     }
 
-       
-        /*
+    /*
     Pomocnicza metoda sprawdzająca, czy dany znak znajduje się w alfabecie
-         */
+     */
     private static boolean isInAlphabet(char c) {
         for (int i = 0; i < alphabet.length; i++) {
             if (alphabet[i] == c) {
