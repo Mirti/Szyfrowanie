@@ -90,8 +90,10 @@ public class HillSceneController implements Initializable {
     @FXML
     private void process() {
         if (rbEncode.isSelected()) {
+            checkInvertMatrixValid();
             encode();
         } else {
+            checkInvertMatrixValid();
             decode();
         }
     }
@@ -111,7 +113,7 @@ public class HillSceneController implements Initializable {
                     input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
                     tempResult = keyMatrix.mult(input); //mnożenie macierzy
                     for (int j = 0; j < tempResult.getNumElements(); j++) {
-                        result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+                        result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
                     }
                 }
                 txtResult.setText(result);
@@ -123,7 +125,7 @@ public class HillSceneController implements Initializable {
                     input = new SimpleMatrix(3, 1, true, new double[]{numbers[i], numbers[i + 1], numbers[i + 2]});
                     tempResult = keyMatrix.mult(input); //mnożenie macierzy
                     for (int j = 0; j < tempResult.getNumElements(); j++) {
-                        result = result + (alphabet[(int) tempResult.get(j) % alphabet.length]);
+                        result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
                     }
                 }
                 txtResult.setText(result);
@@ -152,14 +154,15 @@ public class HillSceneController implements Initializable {
                 keyMatrix.invert().print();
                 for (int i = 0; i < numbers.length; i = i + 2) {
                     input = new SimpleMatrix(2, 1, true, new double[]{numbers[i], numbers[i + 1]});
+                    input.print();
                     tempResult = keyMatrix.invert().mult(input); //mnożenie macierzy
                     //Usuwanie minusa z liczb
                     tempResult.print();
                     for (int j = 0; j < tempResult.getNumElements(); j++) {
                         if (tempResult.get(j) < 0) { //jeżeli liczba w macierzy mniejsza od 0
-                            result = result + alphabet[modulo((int) tempResult.get(j), alphabet.length)];
+                            result = result + alphabet[modulo((int) tempResult.get(j) - 1, alphabet.length)];
                         } else { //jeżeli większa
-                            result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
+                            result = result + (alphabet[modulo((int) tempResult.get(j) + 1, alphabet.length)]);
                         }
                     }
                 }
@@ -174,9 +177,9 @@ public class HillSceneController implements Initializable {
                     tempResult.print();
                     for (int j = 0; j < tempResult.getNumElements(); j++) {
                         if (tempResult.get(j) < 0) { //jeżeli liczba w macierzy mniejsza od 0
-                            result = result + alphabet[modulo((int) tempResult.get(j), alphabet.length)];
+                            result = result + alphabet[modulo((int) tempResult.get(j) - 1, alphabet.length)];
                         } else { //jeżeli większa
-                            result = result + (alphabet[modulo((int) tempResult.get(j), alphabet.length)]);
+                            result = result + (alphabet[modulo((int) tempResult.get(j) + 1, alphabet.length)]);
                         }
                     }
                 }
@@ -308,5 +311,27 @@ public class HillSceneController implements Initializable {
     private int modulo(int a, int b) {
         int modulo = (((a % b) + b) % b);
         return modulo;
+    }
+
+    private void checkInvertMatrixValid() {
+        boolean valid = true;
+        createKeyMatrix();
+        SimpleMatrix invert = keyMatrix.invert();
+        for (int i = 0; i < invert.getNumElements(); i++) {
+            if (((Math.round(invert.get(i)*100.0)/100.0)%1)!=0) {       // Double daje w wyniku przybliżenia (np. 0.999999999932 zamiast 1), stąd zaokrąglanie
+                valid = false;
+            } else {
+                valid = true;
+            }
+        }
+        if (valid == false) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Informacja");
+            alert.setHeaderText(null);
+            alert.setContentText("Odwrotność macierzy klucza zawiera liczby niecałkowite"
+                    + "\n Wyniki działania szyfru mogą być błędne"
+                    + "\n Należy zmienić wartość klucza");
+            alert.showAndWait();
+        }
     }
 }

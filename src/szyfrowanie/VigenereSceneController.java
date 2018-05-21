@@ -49,6 +49,9 @@ public class VigenereSceneController implements Initializable {
         rbDecode.setToggleGroup(group);
     }
 
+    /*
+    Uruchamia metodę szyfrującą lub deszyfrującą, zależnie od wyboru użytkownika
+    */
     @FXML
     private void process() {
         if (rbEncode.isSelected()) {
@@ -58,6 +61,9 @@ public class VigenereSceneController implements Initializable {
         }
     }
 
+    /*
+    Metoda szyfrująca zadany tekst
+    */
     @FXML
     private void encode() {
         String result = "";
@@ -80,6 +86,9 @@ public class VigenereSceneController implements Initializable {
         txtResult.setText(result);
     }
 
+    /*
+    Metoda deszyfrująca zadany tekst
+    */
     @FXML
     private void decode() {
         String result = "";

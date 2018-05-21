@@ -57,7 +57,9 @@ public class CaesarSceneController implements Initializable {
         else decode();
     }
     
-    //Metoda szyfrująca podanym kluczem
+    /*
+    Metoda szyfrująca podanym kluczem
+    */
     @FXML
     private void encode() {
         int key = validateKey(txtKey.getText());
@@ -80,7 +82,9 @@ public class CaesarSceneController implements Initializable {
         txtResult.setText(result);
     }
     
-    //Metoda deszyfrująca podanym kluczem
+    /*
+    Metoda deszyfrująca podanym kluczem
+    */
     @FXML
     private void decode() {
         int key = validateKey(txtKey.getText());
@@ -107,7 +111,7 @@ public class CaesarSceneController implements Initializable {
     Metoda walidująca poprawność klucza.
      */
     private static int validateKey(String key) {
-        if (key.equals("")) return 3;
+        if (key.equals("")) return 3; // Domyślna wartość klucza = 3
         try {
             int convertedInput = Integer.parseInt(key);
             if (convertedInput <= 0) {
