@@ -6,14 +6,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="szyfrowanie.HillSceneController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="szyfrowanie.HillSceneController">
     <children>
       <TextArea id="txtInput" fx:id="txtInput" layoutX="14.0" layoutY="14.0" prefHeight="99.0" prefWidth="284.0" promptText="Wpisz tekst wejściowy" />
       <Button id="btnProcess" layoutX="446.0" layoutY="83.0" mnemonicParsing="false" onAction="#process" prefHeight="60.0" prefWidth="98.0" text="Przetwarzanie" />
-      <TextField id="txtKey" fx:id="txtKey" layoutX="317.0" layoutY="39.0" prefHeight="25.0" prefWidth="95.0" />
       <Label layoutX="351.0" layoutY="14.0" text="Klucz:" />
       <TextArea fx:id="txtResult" editable="false" layoutX="14.0" layoutY="135.0" prefHeight="99.0" prefWidth="284.0" promptText="Wynik" />
-      <RadioButton fx:id="rbEncode" layoutX="317.0" layoutY="83.0" mnemonicParsing="false" text="Szyfrowanie" />
-      <RadioButton fx:id="rbDecode" layoutX="317.0" layoutY="105.0" mnemonicParsing="false" text="Deszyfrowanie" />
+      <RadioButton fx:id="rbEncode" layoutX="318.0" layoutY="206.0" mnemonicParsing="false" text="Szyfrowanie" />
+      <RadioButton fx:id="rbDecode" layoutX="318.0" layoutY="228.0" mnemonicParsing="false" text="Deszyfrowanie" />
+      <RadioButton fx:id="rb2" layoutX="341.0" layoutY="31.0" mnemonicParsing="false" onAction="#hideMatrix" text="2x2" />
+      <RadioButton fx:id="rb3" layoutX="339.0" layoutY="55.0" mnemonicParsing="false" onAction="#showMatrix" text="3x3" />
+      <Pane layoutX="310.0" layoutY="83.0" prefHeight="113.0" prefWidth="128.0">
+         <children>
+            <TextField fx:id="txt11" layoutX="5.0" layoutY="14.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt12" layoutX="46.0" layoutY="14.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt13" layoutX="83.0" layoutY="14.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt21" layoutX="5.0" layoutY="50.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt22" layoutX="46.0" layoutY="50.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt23" layoutX="83.0" layoutY="50.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt31" layoutX="5.0" layoutY="87.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt32" layoutX="46.0" layoutY="87.0" prefHeight="25.0" prefWidth="31.0" />
+            <TextField fx:id="txt33" layoutX="83.0" layoutY="87.0" prefHeight="25.0" prefWidth="31.0" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

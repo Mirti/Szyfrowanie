@@ -66,7 +66,7 @@ public class PlayfairSceneController implements Initializable {
      */
     private void encode() {
         if (validate(txtKey.getText()) && validate(txtInput.getText())) {
-            int[] position1, position2;
+            int[] position1, position2; //pozycje X i Y
             String result = "";
             createTable(txtKey.getText());
             String value = txtInput.getText();
@@ -76,7 +76,7 @@ public class PlayfairSceneController implements Initializable {
                 }
                 System.out.println();
             }
-            pairs = makePairs(value);
+            pairs = makePairs(value);  //Tworzenie par liter
             for (int i = 0; i < pairs.length; i++) {
                 System.out.println(pairs[i]);
             }
@@ -104,7 +104,7 @@ public class PlayfairSceneController implements Initializable {
             alert.setTitle("Informacja");
             alert.setHeaderText(null);
             alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z, z wyłączeniem j"
-                    + "\n Klucz musi zawirać wyłącznie znaki od a do z z wyłączeniem j");
+                    + "\n Klucz musi zawierać wyłącznie znaki od a do z z wyłączeniem j");
             alert.showAndWait();
         }
     }
@@ -143,7 +143,7 @@ public class PlayfairSceneController implements Initializable {
             alert.setTitle("Informacja");
             alert.setHeaderText(null);
             alert.setContentText("Wprowadzony tekst musi zawierać wyłącznie znaki od a do z z wyłączeniem j"
-                    + "\n Klucz musi zawirać wyłącznie znaki od a do z z wyłączeniem j");
+                    + "\n Klucz musi zawierać wyłącznie znaki od a do z z wyłączeniem j");
             alert.showAndWait();
         }
     }
